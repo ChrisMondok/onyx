@@ -27,7 +27,11 @@ enyo.kind({
 			the control is updated to reflect the new value. _getValue_ returns
 			a Date object.
 		*/
-		value: null
+		value: null,
+		/**
+			Increment for minute picker
+		*/
+		increment: 1
 	},
 	events: {
 		/**
