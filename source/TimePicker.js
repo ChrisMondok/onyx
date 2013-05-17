@@ -72,6 +72,8 @@ enyo.kind({
 
 		var d = this.value = this.value || new Date();
 
+		var increment = this.getIncrement();
+
 		// create hours
 		var i;
 		if (!this.is24HrMode){
@@ -87,8 +89,8 @@ enyo.kind({
 		}
 
 		// create minutes
-		for (i=0; i<=59; i++) {
-			this.$.minutePicker.createComponent({content: (i < 10) ? ("0"+i):i, value:i, active: i == d.getMinutes()});
+		for (i=0; i<=59; i+=increment) {
+			this.$.minutePicker.createComponent({content: (i < 10) ? ("0"+i):i, value:i, active: i == increment * Math.floor(d.getMinutes()/increment)});
 		}
 
 		// create am/pm
@@ -155,6 +157,9 @@ enyo.kind({
 		this.refresh();
 	},
 	is24HrModeChanged: function() {
+		this.refresh();
+	},
+	incrementChanged: function() {
 		this.refresh();
 	},
 	valueChanged: function(){
